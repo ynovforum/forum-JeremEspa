@@ -1,0 +1,21 @@
+html
+    head
+        title Signup on my awesome website!
+        //link(rel="stylesheet", href="/css/styles.css")
+    body
+        main
+            if user
+                div Bienvenue #{user.name}
+                if user.role === 'admin'
+                    div Vous êtes un admin Wallah
+                    a(href="/user") le con
+            h1  Stack Overflow
+                a(href="/login") Se Connecter/
+                a(href="/inscription") S'inscrire
+            if user
+                a(href="/Overflow") Ajouter un poste
+            else
+                a(href="/login") Ajouter un poste
+            for post in posts
+                post
+                a(href="/post/" + post.id)  #{post.user.name}: #{post.title} Le #{post.createdAt}

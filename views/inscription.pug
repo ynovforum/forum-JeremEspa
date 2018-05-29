@@ -1,0 +1,41 @@
+doctype html
+html(lang='fr')
+        head
+                meta(charset='UTF-8')
+                title Forum
+                link(href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet")
+                link(rel='stylesheet', href='css/styles.css')
+        body
+                div(class="container-inscription")
+                        div(class="container-title")
+                                div(class="icon-mail")
+                                        img(src="icon/sent-mail.png")
+                                h1 Inscription
+                        div(class="container-login")
+                                form(action="/inscription",method="post")
+                                        label Name
+                                        input(type='text', name="name")
+                                        label Bio
+                                        input(type='text', name="bio")
+                                        label Email
+                                        input(type='text', name="email")
+                                        label Password
+                                        input(type='password', name="password")
+                                        button(type='submit') Enregistrer
+                        div(class="social-network")
+                                h2 Login via social networks
+                                div(class="icon")
+                                        a(href="")
+                                                div(class="icon-twitter")
+                                                        img(src="icon/twitter.png")
+                                        a(href="")
+                                                div(class="icon-facebook")
+                                                        img(src="icon/facebook.png")
+                                        a(href="")
+                                                div(class="icon-pinterest")
+                                                        img(src="icon/pinterest.png")
+                                        a(href="")
+                                                div(class="icon-dribbble")
+                                                        img(src="icon/dribbble.png")
+                        div(class="account")
+                                a(href="/login") You already have an account ?

@@ -1,0 +1,10 @@
+html
+    head
+        title Signup on my awesome website!
+        //link(rel="stylesheet", href="/css/styles.css")
+    body
+        main
+            h1 Liste des Users
+            for user in users
+                user
+                    #{user.name} #{user.bio} #{user.role} #{user.email} #{user.createdAt}
