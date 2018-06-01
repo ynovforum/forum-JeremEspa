@@ -1,0 +1,93 @@
+doctype html
+html(lang='fr')
+    head
+        meta(charset='UTF-8')
+        title Forum
+        link(href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet")
+        link(rel='stylesheet', href='/css/profil.css')
+
+    body
+        div(class="navbar-profile")
+            div(class="menu-profile")
+                span Dashboard
+                span Courses
+                span Applications
+                span Students
+                span Settings
+            div(class="menu-img")
+                img(src="icon/sent-mail.png")
+            div(class="menu-icon")
+                img(src="icon/wallet.png")
+                img(src="icon/man-user.png")
+                img(src="icon/message.png")
+                span Profile
+        div(class="profile-setting")
+            div(class="setting")
+                h2 Settings
+            div(class="automatically")
+                p Automatically saved
+        div(class="container-profile")
+            div(class="myProfile")
+                div(class="myProfile-list")
+                    div(class="myProfile-active")
+                        img(src="icon/man-user.png")
+                    div
+                        h2 My Profile
+                        p How your account looks like
+                div(class="myProfile-list")
+                    div
+                        img(src="icon/notification.png")
+                    div
+                        h2 Notifications
+                        p Email notifications and all around this
+                div(class="myProfile-list")
+                    div
+                        img(src="icon/reload.png")
+                    div
+                        h2 Download History
+                        p View your recent downloads
+                div(class="myProfile-list")
+                    div
+                        img(src="icon/shopping-cart.png")
+                    div
+                        h2 Billing & invoices
+                        p Everything about your money
+                div(class="myProfile-list border")
+                    div
+                        img(src="icon/email.png")
+                    div
+                        h2 Support
+                        p Do you need help?
+            div(class="bio")
+                h2 My Profile
+                div(class="bio-form")
+                    form
+                        div(class="bio-img")
+                            img(src="icon/reload.png")
+                            label Your name
+                            p #{user.name}
+                        label Bio
+                        p #{user.bio}
+                        label E-mail Address
+                        p #{user.email}
+                        button Change
+                        label Password
+                        p #{user.password}
+                        button Change
+                div(class="service")
+                    h2 Connected Services
+                    div(class="service-list")
+                        img(src="")
+                        p Paypal
+                    div(class="service-list")
+                        img(src="")
+                        p Spotify
+                    div(class="service-list")
+                        img(src="")
+                        p Facebook
+                    div(class="service-list")
+                        img(src="")
+                        p Twitter
+                    div(class="service-list")
+                        img(src="")
+                        p Pinterest

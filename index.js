@@ -23,7 +23,7 @@ const User = db.define('user', {
 
 const Post = db.define('post', {
     title: { type : Sequelize.STRING},
-    content: { type: Sequelize.STRING },
+    content: { type: Sequelize.STRING},
     resolvedAt: { type: Sequelize.DATE},
 
 });
@@ -129,7 +129,6 @@ app.get('/user', (req, res) => {
     })
 });
 
-
 app.get('/login', (req, res) => {
 
     res.render('login');
@@ -150,8 +149,17 @@ app.post('/post/:postId/resolved', (req, res) => {
     Post
         .sync()
         .then(() => Post.update({ resolvedAt: new Date()}, {where: {id: req.params.postId}}))
+        .then(()=> res.redirect('/post/'+ req.params.postId));
+});
+
+app.post('/post/:postId/drop', (req, res) => {
+    console.log('dddddddddddddddddddddddddddd')
+    Post
+        .sync()
+        .then(() => Post.destroy( {where: {id: req.params.postId}}))
         .then(()=> res.redirect('/'));
 });
+
 
 
 app.get('/inscription',(req,res) => {
@@ -173,6 +181,14 @@ app.post('/inscription', (req, res) => {
         .then(() => res.redirect('/'));
 });
 
+app.get('/profil/:userId', (req, res) => {
+    const { name, bio, email, password} = req.body;
+    User
+        .sync()
+        .then(() => User.findOne({where: {id: req.params.userId} , User }))
+        .then((user) => res.render('profil', {user, user: req.user}));
+});
+
 app.get('/post/:postId', (req, res) => {
     const { title, content } = req.body;
     Post
@@ -181,15 +197,46 @@ app.get('/post/:postId', (req, res) => {
         .then((post) => res.render('post', {post, user: req.user}));
 });
 
+app.get('/post/:postId/edit', (req, res) => {
+    const { title, content } = req.body;
+    Post
+        .sync()
+        .then(() => Post.findOne({where: {id: req.params.postId}, include: [User] }))
+        .then((post) => res.render('edit', {post, user: req.user}));
+});
+app.post('/post/:postId/edit', (req, res) => {
+    const { title, content } = req.body;
+    Post
+        .sync()
+        .then(() => Post.update({title, content },{where: {id: req.params.postId}}))
+        .then((post) => res.redirect('/post/'+ req.params.postId));
+});
+
 app.post('/comment/:postId', (req, res) => {
     const { commentaire } = req.body;
     Comment
         .sync()
         .then(() => Comment.create({ commentaire, postId: req.params.postId, userId: req.user.id }))
-        .then(() => res.redirect('/'));
+        .then(() => res.redirect('/post/'+ req.params.postId));
 });
-
-
+app.get('/comment/:postId/editcomment', (req, res) => {
+    console.log('dddddddddddddddd');
+    const { title, content, commentaire } = req.body;
+    Comment
+        .sync()
+        .then(() => Comment.findOne({where: {id: req.params.postId}, include: [User] }))
+        .then((comment) => res.render('editc', {comment,user: req.user}));
+});
+app.post('/comment/:commentId/editcomment', (req, res) => {
+    const { commentaire } = req.body;
+    Comment
+        .sync()
+        .then(() => Comment.update({ commentaire }, {where: {id: req.params.commentId}}))
+        .then(() => Comment.findOne({where: {id: req.params.commentId}}))
+        .then((comment) =>
+        { console.log(comment);
+            res.redirect('/post/'+ comment.postId)});
+});
 
 
 

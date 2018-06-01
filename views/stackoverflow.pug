@@ -1,21 +1,60 @@
 html
     head
         title Signup on my awesome website!
-        //link(rel="stylesheet", href="/css/styles.css")
+        link(href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet")
+        link(rel="stylesheet", href="/css/home.css")
     body
-        main
-            if user
-                div Bienvenue #{user.name}
-                if user.role === 'admin'
-                    div Vous êtes un admin Wallah
-                    a(href="/user") le con
-            h1  Stack Overflow
-                a(href="/login") Se Connecter/
-                a(href="/inscription") S'inscrire
+        div(class="navbar")
+            div(class="navbar-span")
+                img(src="/icon/sent-mail.png")
+                a(href="/login")
+                    p Se connecter
+                a(href="/inscription")
+                    p S'inscrire
+                p Your Tickets
+            div(class="navbar-search flex")
+                input(placeholder="Search")
+                if user
+                    a(href="/profil/" + user.id)
+                        p #{user.name}
+                    if user.role === 'admin'
+                        div admin Wallah
+                        a(href="/user") le con
+        div(class="container")
+            h1 Features Questions
+            div(class="container-img")
+                div(class="container-left")
+                    img(src="/icon/maxresdefault.jpg")
+                    div(class="flex")
+                        div(class="container-title")
+                            h2 Designing in US
+                            p United States
+                        div(class="container-btn")
+                            button Buy for $560
+                div(class="container-right margin")
+                    img(src="/icon/maxresdefault.jpg")
+                    div(class="flex")
+                        div(class="container-title")
+                            h2 Designing in US
+                            p United States
+                        div(class="container-btn")
+                            button Buy for $560
+            div(class="container-list")
+                h2 All Questions
+                div(class="list-title")
+                    p Title
+                    p User
+                    p Date
+                div(class="list-ques")
+                    for post in posts
+                        post
+                        div(class="block")
+                            a(href="/post/" + post.id)
+                                p #{post.title}
+                            p #{post.user.name}
+                            p #{post.createdAt}
             if user
                 a(href="/Overflow") Ajouter un poste
             else
                 a(href="/login") Ajouter un poste
-            for post in posts
-                post
-                a(href="/post/" + post.id)  #{post.user.name}: #{post.title} Le #{post.createdAt}
+

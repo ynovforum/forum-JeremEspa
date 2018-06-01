@@ -1,21 +1,44 @@
 html
     head
         title Signup on my awesome website!
-        //link(rel="stylesheet", href="/css/styles.css")
+        link(href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet")
+        link(rel="stylesheet", href="/css/question_list.css")
     body
-        main
-            h1 #{post.title}
-            p #{post.content}
-            if user
-                form(action='/comment/' + post.id, method='post' )
-                    div
-                        label(for='commentaire') Commenter
-                        input(id='commentaire' name='commentaire')
-                        input(type='submit')
-                form(method="post", action="/post/" + post.id + "/resolved")
-                    button(type='submit') Résolu
-            else
-                a(href="/login") Ajouter un commentaire
-            for comment in post.comments
-                comment
-                    h1 #{comment.user.name}: #{comment.commentaire} Le #{comment.createdAt}
+        div(class="navbar")
+            div(class="navbar-span")
+                img(src="/icon/sent-mail.png")
+                p Event
+                p Browse
+                p Your Tickets
+            div(class="navbar-search flex")
+                input(placeholder="Search")
+                p Profile
+        div(class="container")
+            div(class="container-question")
+                div(class="resolve")
+                    h1 !{post.title}
+                    div(class="user-date")
+                        h2 {post.user.name} | #{post.createdAt}
+                    form(method="post", action="/post/" + post.id + "/resolved")
+                        button(class="resolve" type='submit') Résolu
+                    if user.id == post.user.id
+                        a(href="/post/" + post.id +"/edit") con
+                    if user.role == 'admin'
+                        form(method="post", action="/post/" + post.id + "/drop")
+                            button(class="drop" type='submit') Supprimez
+                p !{post.content}
+                    if user
+                        form(action='/comment/' + post.id, method='post' )
+                            div
+                                label(for='commentaire') Commenter
+                                textarea(id='commentaire' name='commentaire')
+                                button(type='submit') Envoyer
+                    else
+                        a(href="/login") Ajouter un commentaire
+                    for comment in post.comments
+                        div(class="user-date")
+                            comment
+                                h2 #{comment.user.name} | #{comment.createdAt}
+                                p #{comment.commentaire}
+                                if user.id == comment.user.id
+                                    a(href="/comment/" + post.id + "/editcomment") con

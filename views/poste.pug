@@ -1,12 +1,43 @@
-html
+doctype html
+html(lang='fr')
     head
-        title Signup on my awesome website!
-        //link(rel="stylesheet", href="/css/styles.css")
+        meta(charset='UTF-8')
+        title Forum
+        link(href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet")
+        link(rel='stylesheet', href='css/poste.css')
+        script(type="text/javascript", src="/tiny_mce/tiny_mce.js")
+        script(type="text/javascript")
+            | tinyMCE.init({
+            | mode : "exact",
+            | elements : "texte",
+            | theme : "advanced",
+            | plugins : "autolink,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave,visualblocks",
+            | theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
+            | theme_advanced_toolbar_location : "top",
+            | theme_advanced_toolbar_align : "left",
+            | theme_advanced_statusbar_location : "bottom",
+            | theme_advanced_resizing :true,
+            | content_css : "./design-tiny.css,",
+            | theme_advanced_font_sizes: "10px,11px,12px,13px,14px,15px,16px,17px,18px,19px,20px,21px,22px,23px,24px,25px",
+            | theme_advanced_text_colors : "33FFFF, 007fff, ff7f00",
+            | theme_advanced_blockformats : "h1, h2,h3,h4,h5,h6",
+            | theme_advanced_styles : "Tableau=textTab;TableauSansCadre=textTabSansCadre;",
+            | });
     body
-        main
-            h1 Ajouter une Question ?
+        div(class="navbar-profile")
+            div(class="menu-profile")
+                span
+                span Courses
+                span Applications
+                span Students
+                span Settings
+        h1 Ajouter une Question ?
+        div(class="container")
+            div(class="container-form")
                 form(action='overflow' method='post' )
-                    div
-                        label(for='title_field') Question
-                        input(id='title_field' name='content')
-                    input(type='submit')
+                    label(for='title_field') Question
+                    input(id='title_field' name='title')
+                    label(for='texte') Contenu
+                    textarea(id="texte", name="content", rows="20")
+                    div(class="right")
+                        button(type='submit') Envoyer

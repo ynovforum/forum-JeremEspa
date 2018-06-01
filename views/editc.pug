@@ -1,0 +1,25 @@
+html
+    head
+        title Signup on my awesome website!
+        link(href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet")
+        link(rel="stylesheet", href="/css/question_list.css")
+    body
+        div(class="navbar")
+            div(class="navbar-span")
+                img(src="/icon/sent-mail.png")
+                p Event
+                p Browse
+                p Your Tickets
+            div(class="navbar-search flex")
+                input(placeholder="Search")
+                p Profile
+        div(class="container")
+            div(class="container-question")
+                div(class="resolve")
+                    div(class="user-date")
+                    if user
+                        form(action='/comment/' + comment.id + "/editcomment", method='post' )
+                            div
+                                label(for='commentaire') Commenter
+                                textarea(id='commentaire' name='commentaire') #{comment.commentaire}
+                                button(type='submit') Envoyer
