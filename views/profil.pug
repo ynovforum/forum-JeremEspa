@@ -9,7 +9,8 @@ html(lang='fr')
     body
         div(class="navbar-profile")
             div(class="menu-profile")
-                span Dashboard
+                a(href="/")
+                    span Accueil
                 span Courses
                 span Applications
                 span Students
@@ -20,7 +21,9 @@ html(lang='fr')
                 img(src="icon/wallet.png")
                 img(src="icon/man-user.png")
                 img(src="icon/message.png")
-                span Profile
+                if user
+                    a(href="/profil/" + user.id)
+                        span #{user.name}
         div(class="profile-setting")
             div(class="setting")
                 h2 Settings
@@ -58,36 +61,54 @@ html(lang='fr')
                     div
                         h2 Support
                         p Do you need help?
-            div(class="bio")
-                h2 My Profile
-                div(class="bio-form")
-                    form
-                        div(class="bio-img")
-                            img(src="icon/reload.png")
-                            label Your name
-                            p #{user.name}
-                        label Bio
-                        p #{user.bio}
-                        label E-mail Address
-                        p #{user.email}
-                        button Change
-                        label Password
-                        p #{user.password}
-                        button Change
+            div(class="container-right")
+                div(class="container-right-1")
+                    h2 My Profile
+                    div(class="container-right-form")
+                        form
+                            div(class="container-right-img flex")
+                                div(class="bio-left")
+                                    img(src="icon/reload.png")
+                                div(class="bio-right")
+                                    label Your name
+                                    input(value=user.name)
+                            label Bio
+                            textarea #{user.bio}
+                            label E-mail Address
+                            input(value=user.email)
+                            button Change
+                            label Password
+                            input(type="password", value=user.password)
+                            button Change
                 div(class="service")
                     h2 Connected Services
                     div(class="service-list")
-                        img(src="")
-                        p Paypal
+                        div(class="service-title")
+                            img(src="icon/paypal.png")
+                            p Paypal
+                        div(class="mail")
+                            p me@janlosert.com
                     div(class="service-list")
-                        img(src="")
-                        p Spotify
+                        div(class="service-title")
+                            img(src="icon/spotify.png")
+                            p Spotify
+                        div(class="mail")
+                            p janlosert@dashboard.com
                     div(class="service-list")
-                        img(src="")
-                        p Facebook
+                        div(class="service-title")
+                            img(src="icon/facebook2.png")
+                            p Facebook
+                        div(class="mail")
+                            p me@janlosert.com
                     div(class="service-list")
-                        img(src="")
-                        p Twitter
-                    div(class="service-list")
-                        img(src="")
-                        p Pinterest
+                        div(class="service-title")
+                            img(src="icon/twitter2.png")
+                            p Twitter
+                        div(class="mail")
+                            p @janlosert.com
+                    div(class="service-list border")
+                        div(class="service-title")
+                            img(src="icon/pinterest2.png")
+                            p Pinterest
+                        div(class="mail")
+                            p me@janlosert.com

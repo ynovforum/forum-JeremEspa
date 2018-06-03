@@ -24,20 +24,39 @@ html(lang='fr')
             | theme_advanced_styles : "Tableau=textTab;TableauSansCadre=textTabSansCadre;",
             | });
     body
-        div(class="navbar-profile")
-            div(class="menu-profile")
-                span
-                span Courses
-                span Applications
-                span Students
-                span Settings
+        div(class="navbar")
+            div(class="navbar-span")
+                a(href="/")
+                    img(src="/icon/sent-mail.png")
+                a(href="/login")
+                    p Se connecter
+                a(href="/inscription")
+                    p S'inscrire
+                if user
+                    if user.role === 'admin'
+                        a(href="/user")
+                            p Admin
+                    else
+                        p Your Tickets
+                if user
+                    a(href="/Overflow")
+                        p Ajouter un poste
+                else
+                    a(href="/login")
+                        p Ajouter un poste
+            div(class="navbar-search flex")
+                input(placeholder="Search")
+                if user
+                    a(href="/profil/" + user.id)
+                        p #{user.name}
         h1 Modifier
         div(class="container")
             div(class="container-form")
                 form(action='edit' method='post' )
                     label(for='title_field') Question
-                    input(id='title_field' name='title' value= post.title)
+                    input(id='title_field' name='title' value=post.title)
                     label(for='texte') Contenu
-                    textarea(id="texte", name="content", rows="20") #{post.content}
+                    div(class="tiny")
+                        textarea(id="texte", name="content", rows="20") #{post.content}
                     div(class="right")
                         button(type='submit') Update

@@ -7,38 +7,66 @@ html
         div(class="navbar")
             div(class="navbar-span")
                 img(src="/icon/sent-mail.png")
-                p Event
-                p Browse
-                p Your Tickets
+                if user
+                    a(href="/disconnect")
+                        p Se deconnecter
+                else
+                    a(href="/login")
+                        p Se connecter
+                    a(href="/inscription")
+                        p S'inscrire
+                if user
+                    if user.role === 'admin'
+                        a(href="/user")
+                            p Admin
+                    else
+                        p Your Tickets
+                if user
+                    a(href="/Overflow")
+                        p Ajouter un poste
+                else
+                    a(href="/login")
+                        p Ajouter un poste
             div(class="navbar-search flex")
                 input(placeholder="Search")
-                p Profile
+                if user
+                    a(href="/profil/" + user.id)
+                        p #{user.name}
         div(class="container")
             div(class="container-question")
-                div(class="resolve")
-                    h1 !{post.title}
+                div(class="flex")
+                    div(class="resolve")
+                        h1 !{post.title}
+                        h2 #{post.user.name} | #{post.createdAt}
                     div(class="user-date")
-                        h2 {post.user.name} | #{post.createdAt}
-                    form(method="post", action="/post/" + post.id + "/resolved")
-                        button(class="resolve" type='submit') Résolu
-                    if user.id == post.user.id
-                        a(href="/post/" + post.id +"/edit") con
-                    if user.role == 'admin'
-                        form(method="post", action="/post/" + post.id + "/drop")
-                            button(class="drop" type='submit') Supprimez
+                        if post
+                            if post.resolvedAt === null
+                                form(method="post", action="/post/" + post.id + "/resolved")
+                                    button(class="resolve" type='submit') Non résolu
+                            else
+                                div(class="resolvegreen")
+                                    button(type='submit') Résolu
+                        if user.id == post.user.id
+                            a(href="/post/" + post.id +"/edit")
+                                button edition
+                        if user.role == 'admin'
+                            form(method="post", action="/post/" + post.id + "/drop")
+                                div(class="supprimer")
+                                    button(class="drop" type='submit') Supprimer
                 p !{post.content}
-                    if user
-                        form(action='/comment/' + post.id, method='post' )
-                            div
-                                label(for='commentaire') Commenter
-                                textarea(id='commentaire' name='commentaire')
-                                button(type='submit') Envoyer
-                    else
-                        a(href="/login") Ajouter un commentaire
                     for comment in post.comments
-                        div(class="user-date")
+                        div(class="user")
                             comment
                                 h2 #{comment.user.name} | #{comment.createdAt}
                                 p #{comment.commentaire}
                                 if user.id == comment.user.id
-                                    a(href="/comment/" + post.id + "/editcomment") con
+                                    a(href="/comment/" + comment.id + "/editcomment") Edit
+
+                    if user
+                        form(action='/comment/' + post.id, method='post' )
+                            label(for='commentaire') Commenter
+                            textarea(id='commentaire' name='commentaire')
+                            div(class="right")
+                                button(type='submit') Envoyer
+                    else
+                        a(href="/login") Ajouter un commentaire

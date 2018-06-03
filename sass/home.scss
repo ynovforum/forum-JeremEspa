@@ -10,6 +10,7 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: solid 1px #7f8fa4;
+
 }
 
 .navbar-span {
@@ -26,6 +27,14 @@ body {
     padding-right: 30px;
     height:20px;
     color: #7f8fa4;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
   }
 }
 

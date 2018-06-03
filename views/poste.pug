@@ -2,7 +2,7 @@ doctype html
 html(lang='fr')
     head
         meta(charset='UTF-8')
-        title Forum
+        title Signup on my awesome website!
         link(href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet")
         link(rel='stylesheet', href='css/poste.css')
         script(type="text/javascript", src="/tiny_mce/tiny_mce.js")
@@ -24,13 +24,35 @@ html(lang='fr')
             | theme_advanced_styles : "Tableau=textTab;TableauSansCadre=textTabSansCadre;",
             | });
     body
-        div(class="navbar-profile")
-            div(class="menu-profile")
-                span
-                span Courses
-                span Applications
-                span Students
-                span Settings
+        div(class="navbar")
+            div(class="navbar-span")
+                a(href="/")
+                 img(src="/icon/sent-mail.png")
+                if user
+                    a(href="/disconnect")
+                        p Se deconnecter
+                else
+                    a(href="/login")
+                        p Se connecter
+                    a(href="/inscription")
+                        p S'inscrire
+                if user
+                    if user.role === 'admin'
+                        a(href="/user")
+                            p Admin
+                    else
+                        p Your Tickets
+                if user
+                    a(href="/Overflow")
+                        p Ajouter un poste
+                else
+                    a(href="/login")
+                        p Ajouter un poste
+            div(class="navbar-search flex")
+                input(placeholder="Search")
+                if user
+                    a(href="/profil/" + user.id)
+                        p #{user.name}
         h1 Ajouter une Question ?
         div(class="container")
             div(class="container-form")
@@ -38,6 +60,7 @@ html(lang='fr')
                     label(for='title_field') Question
                     input(id='title_field' name='title')
                     label(for='texte') Contenu
-                    textarea(id="texte", name="content", rows="20")
+                    div(class="tiny")
+                        textarea(id="texte", name="content", rows="20")
                     div(class="right")
                         button(type='submit') Envoyer

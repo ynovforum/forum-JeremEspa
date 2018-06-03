@@ -1,5 +1,7 @@
-html
+doctype html
+html(lang='fr')
     head
+        meta(charset='UTF-8')
         title Signup on my awesome website!
         link(href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet")
         link(rel="stylesheet", href="/css/home.css")
@@ -7,19 +9,32 @@ html
         div(class="navbar")
             div(class="navbar-span")
                 img(src="/icon/sent-mail.png")
-                a(href="/login")
-                    p Se connecter
-                a(href="/inscription")
-                    p S'inscrire
-                p Your Tickets
+                if user
+                    a(href="/disconnect")
+                        p Se deconnecter
+                else
+                    a(href="/login")
+                        p Se connecter
+                    a(href="/inscription")
+                        p S'inscrire
+                if user
+                    if user.role === 'admin'
+                        a(href="/user")
+                            p Admin
+                    else
+                        p Your Tickets
+                if user
+                    a(href="/Overflow")
+                        p Ajouter un poste
+                else
+                    a(href="/login")
+                        p Ajouter un poste
             div(class="navbar-search flex")
                 input(placeholder="Search")
                 if user
                     a(href="/profil/" + user.id)
                         p #{user.name}
-                    if user.role === 'admin'
-                        div admin Wallah
-                        a(href="/user") le con
+
         div(class="container")
             h1 Features Questions
             div(class="container-img")
@@ -49,12 +64,13 @@ html
                     for post in posts
                         post
                         div(class="block")
-                            a(href="/post/" + post.id)
-                                p #{post.title}
+                            if user
+                                a(href="/post/" + post.id)
+                                    p #{post.title}
+                            else
+                                a(href="/login" )
+                                    p #{post.title}
                             p #{post.user.name}
                             p #{post.createdAt}
-            if user
-                a(href="/Overflow") Ajouter un poste
-            else
-                a(href="/login") Ajouter un poste
+
 

@@ -126,7 +126,7 @@ app.get('/user', (req, res) => {
                 .then((users) => {
                     res.render('user', {users, user: req.user});
                 })
-    })
+        })
 });
 
 app.get('/login', (req, res) => {
@@ -174,11 +174,16 @@ app.post('/inscription', (req, res) => {
         .then((count) =>
         { let role = 'utilisateur'
             if (count == 0){
-            role = 'admin'
+                role = 'admin'
             }
             User.create({ name, bio, role, email, password})
         })
         .then(() => res.redirect('/'));
+});
+
+app.get('/disconnect', (req, res) => {
+    req.logout();
+    res.redirect('/');
 });
 
 app.get('/profil/:userId', (req, res) => {
